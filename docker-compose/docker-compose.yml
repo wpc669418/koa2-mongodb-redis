@@ -10,4 +10,4 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - /study/mongo_data:/data/db
+      - /study/mongo_datas:/data/db
