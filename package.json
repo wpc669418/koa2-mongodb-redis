@@ -7,7 +7,7 @@
     "start": "nodemon --exec babel-node src/index.js",
     "webpack:debug": "node --inspect-brk ./node_modules/.bin/webpack --inline --progress",
     "build": "cross-env NODE_ENV=prod webpack --config config/webpack.config.prod.js",
-    "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node --inspect ./src/index.js",
+    "dev": "cross-env NODE_ENV=dev nodemon --exec babel-node --inspect=9229 ./src/index.js",
     "clean": "rimraf dist"
   },
   "keywords": [],
@@ -23,7 +23,10 @@
     "koa-helmet": "^4.2.0",
     "koa-json": "^2.0.2",
     "koa-router": "^7.4.0",
-    "koa-static": "^5.0.0"
+    "koa-static": "^5.0.0",
+    "log4js": "^6.3.0",
+    "redis": "^3.0.2",
+    "svg-captcha": "^1.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

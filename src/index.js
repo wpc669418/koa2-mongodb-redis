@@ -8,6 +8,9 @@ import jsonutil from 'koa-json'
 import cors from '@koa/cors'
 import compose from 'koa-compose'
 import compress from 'koa-compress'
+import './util/redis'
+import { log } from './util/log'
+import { systemConfig } from './config'
 
 const app = new koa()
 
@@ -31,4 +34,6 @@ if (!isDevMode) {
 app.use(middleware)
 app.use(router())
 
-app.listen(3000)
+app.listen(systemConfig.serverPort, () => {
+  log.info(`server is running in ${systemConfig.serverPort}`)
+})
