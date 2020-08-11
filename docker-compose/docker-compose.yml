@@ -1,4 +1,4 @@
-version: '3.1'
+version: "3.1"
 
 services:
   mongo_cms:
@@ -20,4 +20,14 @@ services:
       - 6379:6379
     volumes:
       - /study/redis_data:/data
-    command: ['redis-server', '--requirepass', '123456']
+    command: ["redis-server", "--requirepass", "123456"]
+  mysql_cms:
+    image: "mysql:5.7"
+    container_name: mysql_cms
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "1111qqqq"
+      MYSQL_USER: "jkadmin"
+      MYSQL_PASS: "1111qqqq"

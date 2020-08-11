@@ -52,6 +52,7 @@ const setValue = (key, value) => {
     // 字符串类型
     if (typeof value === 'string') {
       client.set(key, value, (err, res) => {
+        console.log('setValue -> err', err)
         if (err) {
           reject(err)
         } else {
@@ -110,10 +111,28 @@ const getHashVaule = (key) => {
   })
 }
 
+/**
+ * 
+ * @param {键} key 
+ * @param {过期时间/秒} seconds 
+ */
+const setExpire = (key, seconds) => {
+  return new Promise((resolve, reject) => {
+    client.expire(key, seconds, (err, reply) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(reply)
+      }
+    })
+  })
+}
+
 
 export {
   client,
   setValue,
   getVaule,
-  getHashVaule
+  getHashVaule,
+  setExpire
 }

@@ -16,6 +16,18 @@ const app = new koa()
 
 const isDevMode = process.env.NODE_ENV === 'production' ? false : true
 
+// 全局异常捕捉 洋葱模型的最外层 捕获内部的错误
+app.use(async (ctx, netx) => {
+  try {
+    await netx()
+  } catch (error) {
+    ctx.body = {
+      msg: error,
+      code: 500
+    }
+  }
+})
+
 /**
  * 使用koa-compose 集成中间件
  */
