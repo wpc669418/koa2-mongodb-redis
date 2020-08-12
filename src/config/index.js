@@ -9,7 +9,7 @@ const redisConfig = {
 const mysqlConfig = {
   host: 'localhost',
   port: '3306',
-  user: 'jkadmin',
+  user: 'root',
   password: '1111qqqq',
   database: 'week_work'
 }

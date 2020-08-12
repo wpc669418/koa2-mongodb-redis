@@ -8,26 +8,19 @@ import jsonutil from 'koa-json'
 import cors from '@koa/cors'
 import compose from 'koa-compose'
 import compress from 'koa-compress'
-import './utils/mysql/index'
+import './utils/mysql'
 import './utils/redis'
-import { log } from './util/log'
+import { log } from './utils/log'
 import { systemConfig } from './config'
+import catchError from './middlewares/catchError'
+import { InitManager } from './core/init'
+// 全局异常中间件监听、处理，放在所有中间件的最前面
 
 const app = new koa()
-
+InitManager.init_global()
 const isDevMode = process.env.NODE_ENV === 'production' ? false : true
 
-// 全局异常捕捉 洋葱模型的最外层 捕获内部的错误
-app.use(async (ctx, netx) => {
-  try {
-    await netx()
-  } catch (error) {
-    ctx.body = {
-      msg: error,
-      code: 500
-    }
-  }
-})
+app.use(catchError)
 
 /**
  * 使用koa-compose 集成中间件

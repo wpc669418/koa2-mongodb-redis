@@ -1,5 +1,5 @@
 import svgCaptcha from 'svg-captcha';
-import * as redis from '../util/redis'
+import * as redis from '../utils/redis'
 
 class ErrorModel {
   constructor(text) {
