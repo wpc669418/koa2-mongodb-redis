@@ -1,0 +1,24 @@
+version: "2"
+services:
+  DOClever:
+    image: lw96/doclever
+    restart: always
+    container_name: "DOClever"
+    ports:
+      - 10000:10000
+    volumes:
+      - /doclever/file:/root/DOClever/data/file
+      - /doclever/img:/root/DOClever/data/img
+      - /doclever/tmp:/root/DOClever/data/tmp
+    environment:
+      - DB_HOST=mongodb://mongo:27017/DOClever
+      - PORT=10000
+    links:
+      - mongo:mongo
+
+  mongo:
+    image: mongo:latest
+    restart: always
+    container_name: "mongodb"
+    volumes:
+      - /mongodb/own/datadir:/data/db

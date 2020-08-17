@@ -31,3 +31,17 @@ services:
       MYSQL_ROOT_PASSWORD: "1111qqqq"
       MYSQL_USER: "jkadmin"
       MYSQL_PASS: "1111qqqq"
+
+  DOClever:
+    image: lw96/doclever:latest
+    restart: always
+    container_name: "DOClever"
+    ports:
+      - 10000:10000
+    volumes:
+      - /study/hostdir/file:/root/DOClever/data/file
+      - /study/hostdir/img:/root/DOClever/data/img
+      - /study/hostdir/tmp:/root/DOClever/data/tmp
+    environment:
+      - DB_HOST=mongodb://doclever:123456@localhost:27017/DOClever
+      - PORT=10000
