@@ -9,12 +9,10 @@ class ProjectController {
    * @param {*} ctx 
    */
   async addProject (ctx) {
+    const body = ctx.request.body
     await add({
       tableName: 'work_project',
-      models: {
-        code: '123111',
-        attribute: '你好吗？？？'
-      }
+      models: body
     })
     ctx.body = ctx.body = new global.success.info()
   }
@@ -24,6 +22,7 @@ class ProjectController {
      * @param {*} ctx 
      */
   async updateProject (ctx) {
+    ctx.body = ctx.request.body
     const { code } = ctx.request
     const { name } = ctx.request
     await update({
@@ -33,14 +32,15 @@ class ProjectController {
         name
       },
       where: {
-        code: '123'
+        uid: '123'
       }
     })
     ctx.body = new global.success.info()
   }
 
   async findProject (ctx) {
-    const { code } = ctx.query
+    ctx.body = ctx.request.query
+    const { code } = ctx.request.query
     const { name } = ctx.query
     const res = await find({
       tableName: 'work_project',

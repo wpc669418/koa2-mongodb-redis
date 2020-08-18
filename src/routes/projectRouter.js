@@ -5,9 +5,9 @@ const router = new Router()
 
 router.prefix('/project')
 
-router.get('/add', projectController.addProject)
+router.post('/add', projectController.addProject)
 
-router.get('/update', projectController.updateProject)
+router.post('/update', projectController.updateProject)
 
 router.get('/find', projectController.findProject)
 
