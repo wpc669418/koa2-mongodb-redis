@@ -3,6 +3,7 @@ const catchError = async (ctx, next) => {
   try {
     await next()
   } catch (error) {
+    global.log.debug(error)
     // 已知异常
     const isHttpException = error instanceof HttpException
     // 开发环境

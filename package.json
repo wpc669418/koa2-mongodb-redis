@@ -15,6 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "@koa/cors": "^3.0.0",
+    "dayjs": "^1.8.34",
+    "excel-export": "^0.5.1",
     "koa": "^2.7.0",
     "koa-body": "^4.1.0",
     "koa-combine-routers": "^4.0.2",

@@ -1,5 +1,6 @@
 const mysql = require('mysql2');
 import { mysqlConfig } from '../../config'
+import { log } from '../log'
 const connection = mysql.createConnection(mysqlConfig);
 
 /**
@@ -10,7 +11,7 @@ connection.connect((err) => {
     console.error('error connecting: ' + err.stack);
     return;
   }
-  console.log('connected as id ' + connection.threadId);
+  log.info(`connected as id ${connection.threadId}`)
 })
 
 
@@ -52,7 +53,9 @@ const end = () => {
  * @param {键值对的集合} models 
  */
 const add = async ({ tableName, models }) => {
+  console.log('add -> models', models)
   // 判断是否为对象
+
   if (!(models instanceof Object)) return
   // 需要修改的列
   let columns = ''
@@ -64,7 +67,8 @@ const add = async ({ tableName, models }) => {
   })
   const sql = `INSERT INTO ${tableName} (${sql_replace(columns)}) VALUES (${sql_replace(datas)});`
   global.log.info(sql)
-  await query(sql)
+  const res = await query(sql)
+  console.log('add -> res', res)
 }
 /**
  * 更新
@@ -88,9 +92,13 @@ const update = async ({ tableName, models, where }) => {
       where_str += `${item}="${where[item]}"`
     }
   })
+  /**
+   * 拼接sql
+   */
   const sql = `UPDATE ${tableName} SET ${sql_replace(columns_values)} WHERE ${sql_replace(where_str)};`
   global.log.info(sql)
-  await query(sql)
+  const res = await query(sql)
+  console.log('update -> res', res)
 }
 
 /**
@@ -101,8 +109,7 @@ const find = async ({
   tableName,
   where
 }) => {
-  console.log('where', where)
-  if (!(where instanceof Object)) {
+  if (!(typeof where === "object")) {
     throw new global.errs.HttpException('类型错误')
   }
   let wheres_str = ''

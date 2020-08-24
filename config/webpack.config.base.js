@@ -14,6 +14,11 @@ const webpackconfig = {
     filename: '[name].bundle.js',
     path: utils.DIST_PATH
   },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirnamem, 'src/utils/')
+    }
+  },
   module: {
     rules: [
       {

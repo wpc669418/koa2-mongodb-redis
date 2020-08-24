@@ -14,7 +14,7 @@ import { log } from './utils/log'
 import { systemConfig } from './config'
 import catchError from './middlewares/catchError'
 import { InitManager } from './core/init'
-// 全局异常中间件监听、处理，放在所有中间件的最前面
+// 全局异常中间件监听、处理，放在所有中间件的最前面 洋葱模型最外层
 
 const app = new koa()
 InitManager.init_global()
